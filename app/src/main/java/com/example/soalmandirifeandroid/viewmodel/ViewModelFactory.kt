@@ -10,7 +10,8 @@ class ViewModelFactory constructor(private val application: Application) :
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         with(modelClass) {
             when {
-                isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(application)
+                isAssignableFrom(VmMovies::class.java) -> VmMovies(application)
+                isAssignableFrom(VmDiscovery::class.java) -> VmDiscovery(application)
                 else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }
         } as T
