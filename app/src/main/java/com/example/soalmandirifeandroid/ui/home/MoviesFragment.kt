@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.soalmandirifeandroid.R
 import com.example.soalmandirifeandroid.adapter.AdapterDiscoveryMovies
 import com.example.soalmandirifeandroid.di.Injection
+import com.example.soalmandirifeandroid.entity.ResultsItem
 import com.example.soalmandirifeandroid.viewmodel.VmMovies
 import kotlinx.android.synthetic.main.fragment_movies.*
 
@@ -39,11 +40,13 @@ class MoviesFragment : Fragment() {
 
     private fun liveData() {
         viewModel.liveListMovies.observe(viewLifecycleOwner, Observer {
-
+            adapterDiscoveryMovies.addList(it.results as ArrayList<ResultsItem>)
+            rvMovies.adapter = adapterDiscoveryMovies
         })
     }
 
     private fun initView() {
+        adapterDiscoveryMovies = AdapterDiscoveryMovies()
         rvMovies.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
