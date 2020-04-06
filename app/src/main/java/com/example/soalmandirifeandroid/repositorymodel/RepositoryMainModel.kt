@@ -15,7 +15,7 @@ class RepositoryMainModel(application: Application) {
         onResult: (ResponseDiscoveryMovies?) -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        service.getDiscoveryMovies(BuildConfig.API_KEY)
+        service.getDiscoveryMovies(BuildConfig.API_KEY, "en-US")
             .enqueue(object : Callback<ResponseDiscoveryMovies> {
                 override fun onFailure(call: Call<ResponseDiscoveryMovies>, t: Throwable) {
                     onError(t)
@@ -25,7 +25,7 @@ class RepositoryMainModel(application: Application) {
                     call: Call<ResponseDiscoveryMovies>,
                     response: Response<ResponseDiscoveryMovies>
                 ) {
-                    if (response.isSuccessful) onResult(response.body())
+                    if (response.code() == 200) if (response.isSuccessful) onResult(response.body())
                 }
 
             })

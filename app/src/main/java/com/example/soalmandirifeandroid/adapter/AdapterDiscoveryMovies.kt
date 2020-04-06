@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.soalmandirifeandroid.R
 import com.example.soalmandirifeandroid.entity.ResultsItem
+import kotlinx.android.synthetic.main.items_discovery_movies.view.*
 
 class AdapterDiscoveryMovies : RecyclerView.Adapter<AdapterDiscoveryMovies.VH>() {
     private val list = arrayListOf<ResultsItem>()
@@ -26,6 +28,13 @@ class AdapterDiscoveryMovies : RecyclerView.Adapter<AdapterDiscoveryMovies.VH>()
 
     override fun onBindViewHolder(holder: AdapterDiscoveryMovies.VH, position: Int) {
         val items = list[position]
+        with(holder.itemView) {
+            Glide.with(context).load("https://image.tmdb.org/t/p/w185${items.posterPath}")
+                .into(item_img_movie)
+            item_judul_movie.text = items.originalTitle
+            item_popularity_movie.text = "${items.popularity}"
+            item_overview_movie.text = items.overview
+        }
     }
 
     inner class VH(view: View) : RecyclerView.ViewHolder(view)

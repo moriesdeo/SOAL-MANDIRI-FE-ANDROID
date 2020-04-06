@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.soalmandirifeandroid.R
 import com.example.soalmandirifeandroid.adapter.AdapterDiscoveryMovies
 import com.example.soalmandirifeandroid.di.Injection
@@ -39,8 +40,14 @@ class DiscoveryFragment : Fragment() {
         liveData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getDiscoveryMovies()
+    }
+
     private fun liveData() {
         viewModel.liveDiscoveryMovies.observe(viewLifecycleOwner, Observer {
+            progDiscovery.visibility = View.GONE
             if (it.results != null) {
                 adapterDiscoveryMovies.addList(it.results as ArrayList<ResultsItem>)
                 rvDicovery.adapter = adapterDiscoveryMovies
@@ -55,6 +62,7 @@ class DiscoveryFragment : Fragment() {
         rvDicovery.apply {
             setHasFixedSize(true)
             layoutAnimation = layoutAnimationController
+            layoutManager = LinearLayoutManager(context)
         }
     }
 }

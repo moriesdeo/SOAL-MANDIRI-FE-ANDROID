@@ -8,6 +8,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface RestApi {
@@ -30,10 +31,10 @@ interface RestApi {
         }
     }
 
+    @Headers("X-Requested-With:XMLHttpRequest")
     @GET("discover/movie?")
     fun getDiscoveryMovies(
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
     ): Call<ResponseDiscoveryMovies>
-
-
 }
