@@ -40,6 +40,7 @@ class MoviesFragment : Fragment() {
 
     private fun liveData() {
         viewModel.liveListMovies.observe(viewLifecycleOwner, Observer {
+            progMovies.visibility = View.GONE
             adapterDiscoveryMovies.addList(it.results as ArrayList<ResultsItem>)
             rvMovies.adapter = adapterDiscoveryMovies
         })
