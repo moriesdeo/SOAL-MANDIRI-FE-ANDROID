@@ -33,10 +33,11 @@ class RepositoryMainModel(application: Application) {
     }
 
     fun getListMovies(
+        page: Int,
         onResult: (ResponseUpComingMovies?) -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        service.getListMovies(BuildConfig.API_KEY, "en-US")
+        service.getListMovies(BuildConfig.API_KEY, "en-US", page)
             .enqueue(object : Callback<ResponseUpComingMovies> {
                 override fun onFailure(call: Call<ResponseUpComingMovies>, t: Throwable) {
                     onError(t)

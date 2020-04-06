@@ -11,7 +11,7 @@ class VmMovies(application: Application) : ViewModel() {
 
     var liveListMovies = MutableLiveData<ResponseUpComingMovies>()
     internal fun getListMovies() {
-        repositoryMain.getListMovies({
+        repositoryMain.getListMovies(1, {
             liveListMovies.postValue(it)
         }, {
 

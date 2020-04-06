@@ -43,6 +43,7 @@ interface RestApi {
     @GET("movie/now_playing?")
     fun getListMovies(
         @Query("api_key") apiKey: String,
-        @Query("language") language: String
+        @Query("language") language: String,
+        @Query("page") page: Int
     ): Call<ResponseUpComingMovies>
 }
