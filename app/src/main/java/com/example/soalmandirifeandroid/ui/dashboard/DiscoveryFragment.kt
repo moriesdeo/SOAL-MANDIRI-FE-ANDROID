@@ -4,11 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.soalmandirifeandroid.R
+import com.example.soalmandirifeandroid.adapter.AdapterDiscoveryMovies
+import com.example.soalmandirifeandroid.di.Injection
+import com.example.soalmandirifeandroid.entity.ResultsItem
+import com.example.soalmandirifeandroid.viewmodel.VmDiscovery
+import kotlinx.android.synthetic.main.fragment_discovery.*
 
 class DiscoveryFragment : Fragment() {
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            Injection.provideViewModelFactory(activity!!.application)
+        ).get(VmDiscovery::class.java)
+    }
+    private lateinit var adapterDiscoveryMovies: AdapterDiscoveryMovies
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -16,7 +30,31 @@ class DiscoveryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_discovery, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
         return root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initView()
+        liveData()
+    }
+
+    private fun liveData() {
+        viewModel.liveDiscoveryMovies.observe(viewLifecycleOwner, Observer {
+            if (it.results != null) {
+                adapterDiscoveryMovies.addList(it.results as ArrayList<ResultsItem>)
+                rvDicovery.adapter = adapterDiscoveryMovies
+            }
+        })
+    }
+
+    private fun initView() {
+        val mRestID = R.anim.layout_animation_fall_down
+        val layoutAnimationController = AnimationUtils.loadLayoutAnimation(context, mRestID)
+        adapterDiscoveryMovies = AdapterDiscoveryMovies()
+        rvDicovery.apply {
+            setHasFixedSize(true)
+            layoutAnimation = layoutAnimationController
+        }
     }
 }

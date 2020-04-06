@@ -6,4 +6,6 @@ import com.example.soalmandirifeandroid.repositorymodel.RepositoryMainModel
 
 class VmMovies(application: Application) : ViewModel() {
     private var repositoryMain = RepositoryMainModel(application)
+
+
 }
