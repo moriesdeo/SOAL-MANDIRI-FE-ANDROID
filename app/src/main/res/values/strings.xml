@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">SOAL MANDIRI FE ANDROID</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_movies">Movies</string>
+    <string name="title_discovery">Discovery</string>
 </resources>
