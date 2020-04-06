@@ -42,26 +42,27 @@ class DiscoveryFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        adapterDiscoveryMovies.clearList()
         viewModel.getDiscoveryMovies()
     }
 
     private fun liveData() {
+        val mRestID = R.anim.layout_animation_fall_down
+        val layoutAnimationController = AnimationUtils.loadLayoutAnimation(context, mRestID)
         viewModel.liveDiscoveryMovies.observe(viewLifecycleOwner, Observer {
             progDiscovery.visibility = View.GONE
             if (it.results != null) {
                 adapterDiscoveryMovies.addList(it.results as ArrayList<ResultsItem>)
                 rvDicovery.adapter = adapterDiscoveryMovies
+                rvDicovery.layoutAnimation = layoutAnimationController
             }
         })
     }
 
     private fun initView() {
-        val mRestID = R.anim.layout_animation_fall_down
-        val layoutAnimationController = AnimationUtils.loadLayoutAnimation(context, mRestID)
         adapterDiscoveryMovies = AdapterDiscoveryMovies()
         rvDicovery.apply {
             setHasFixedSize(true)
-            layoutAnimation = layoutAnimationController
             layoutManager = LinearLayoutManager(context)
         }
     }

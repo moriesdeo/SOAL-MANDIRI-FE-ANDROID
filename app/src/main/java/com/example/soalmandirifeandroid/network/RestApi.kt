@@ -2,6 +2,7 @@ package com.example.soalmandirifeandroid.network
 
 import com.example.soalmandirifeandroid.BuildConfig
 import com.example.soalmandirifeandroid.entity.ResponseDiscoveryMovies
+import com.example.soalmandirifeandroid.entity.ResponseUpComingMovies
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -37,4 +38,11 @@ interface RestApi {
         @Query("api_key") apiKey: String,
         @Query("language") language: String
     ): Call<ResponseDiscoveryMovies>
+
+    @Headers("X-Requested-With:XMLHttpRequest")
+    @GET("movie/now_playing?")
+    fun getListMovies(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<ResponseUpComingMovies>
 }
