@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.soalmandirifeandroid.R
+import com.example.soalmandirifeandroid.adapter.AdapterDiscoveryMovies
 import com.example.soalmandirifeandroid.di.Injection
 import com.example.soalmandirifeandroid.viewmodel.VmMovies
 
@@ -17,6 +18,7 @@ class MoviesFragment : Fragment() {
             Injection.provideViewModelFactory(activity!!.application)
         ).get(VmMovies::class.java)
     }
+    private lateinit var adapterDiscoveryMovies: AdapterDiscoveryMovies
 
     override fun onCreateView(
         inflater: LayoutInflater,
