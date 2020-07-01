@@ -14,15 +14,24 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/\""
-        buildConfigField "String", "TSDB_API_KEY", "\"3/\""
-        buildConfigField "String", "API_KEY", "\"d326fff658f490c8e464a6fa32642ca7\""
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/\""
+            buildConfigField "String", "TSDB_API_KEY", "\"3/\""
+            buildConfigField "String", "API_KEY", "\"d326fff658f490c8e464a6fa32642ca7\""
+
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/\""
+            buildConfigField "String", "TSDB_API_KEY", "\"3/\""
+            buildConfigField "String", "API_KEY", "\"d326fff658f490c8e464a6fa32642ca7\""
+
+            debuggable = true
         }
     }
 
