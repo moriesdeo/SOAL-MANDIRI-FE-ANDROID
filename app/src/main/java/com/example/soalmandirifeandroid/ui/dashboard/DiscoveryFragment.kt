@@ -20,7 +20,7 @@ class DiscoveryFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider(
             this,
-            Injection.provideViewModelFactory(activity!!.application)
+            Injection.provideViewModelFactory(requireActivity().application)
         ).get(VmDiscovery::class.java)
     }
     private lateinit var adapterDiscoveryMovies: AdapterDiscoveryMovies

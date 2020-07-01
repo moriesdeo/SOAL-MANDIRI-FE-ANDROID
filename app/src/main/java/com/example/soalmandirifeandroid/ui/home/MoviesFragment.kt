@@ -19,7 +19,7 @@ class MoviesFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider(
             this,
-            Injection.provideViewModelFactory(activity!!.application)
+            Injection.provideViewModelFactory(requireActivity().application)
         ).get(VmMovies::class.java)
     }
     private lateinit var adapterDiscoveryMovies: AdapterDiscoveryMovies
